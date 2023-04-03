@@ -1,2 +1,0 @@
-# Tehtavienpalautusrepositorio
-FullStack-kurssin palautukset.
