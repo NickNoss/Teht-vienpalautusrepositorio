@@ -1,13 +1,11 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = '/api/persons'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
     return request.then(response => {
         console.log('success!', response.data)
         return response.data
-    }).catch(error => {
-        console.log('fail', error)
     })
 }
 
@@ -16,8 +14,6 @@ const create = newObject => {
     return request.then(response => {
         console.log('success!', response.data)
         return response.data
-    }).catch(error => {
-        console.log('fail', error)
     })
 }
 
@@ -26,8 +22,6 @@ const update = (id, newObject) => {
     return request.then(response => {
         console.log('success!', response.data)
         return response.data
-    }).catch(error => {
-        console.log('fail', error)
     })
 }
 
@@ -36,8 +30,6 @@ const remove = (id) => {
     return request.then(response => {
         console.log('success!', response.data)
         return response.data
-    }).catch(error => {
-        console.log('fail', error)
     })
 }
 

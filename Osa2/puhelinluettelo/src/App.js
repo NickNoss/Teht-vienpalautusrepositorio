@@ -58,15 +58,18 @@ const App = () => {
           setTimeout(() => {
             setSuccessMessage(null)
           }, 5000)
+        }).catch(error => {
+          console.log(error.response.data)
+          setErrorMessage(`Error: ${error.response.data.error}`)
         })
     }
   }
 
-  const filteredPersons = persons.filter(person => {
+  const filteredPersons = persons ? persons.filter(person => {
     const name = person.name ? person.name.toLowerCase() : ''
-    const number = person.number ? person.number.toLowerCase() : ''
+    const number = person.number || ''
     return name.includes(filter) || number.includes(filter)
-  })
+  }) : []
 
   const handleNameChange = (event) => setNewName(event.target.value)
   const handleNumberChange = (event) => setNewNumber(event.target.value)
