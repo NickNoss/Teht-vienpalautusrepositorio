@@ -37,8 +37,17 @@ userRouter.post('/', async (request, response) => {
     response.status(201).json(savedUser)
 })
 
+userRouter.get('/:id', async (request, response) => {
+    const user = await User.findById(request.params.id).populate('blogs', 'url title author id')
+    if (user) {
+        response.json(user)
+    } else {
+        response.status(404).end()
+    }
+})
+
 userRouter.delete('/', async (request, response) => {
-    await User.deleteMany({})
+    await User.deleteMany({}) 
     response.sendStatus(204)
 })
 
