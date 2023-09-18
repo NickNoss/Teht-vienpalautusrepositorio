@@ -132,6 +132,7 @@ describe('API GET/POST tests', () => {
       .then((response) => {
         newBlog.id = response.body.id
         expect(response.body.title).toContain('Testiblogi')
+        console.log(response.body.user)
       })
   })
 
@@ -196,6 +197,7 @@ describe('API DELETE tests', () => {
   })
 
   test('Blog can be deleted', async () => {
+    console.log(token)
     const blogs = await api.get('/api/blogs')
     const idToDelete = blogs.body[0].id
     await api.delete(`/api/blogs/${idToDelete}`).set('Authorization', `Bearer ${token}`).expect(204)

@@ -7,6 +7,7 @@ blogRouter.get('/', async (request, response) => {
 })
 
 blogRouter.post('/', async (request, response) => {
+  console.log(request.user)
   const body = request.body
   const user = request.user
   if (!user) {
@@ -18,7 +19,7 @@ blogRouter.post('/', async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes,
-    user: user._id
+    user: user.id
   })
   
   try {
@@ -31,6 +32,15 @@ blogRouter.post('/', async (request, response) => {
     if (error.name === 'ValidationError') {
       return response.status(400).json({ error: error.message })
     }
+  }
+})
+
+blogRouter.get('/:id', async (request, response) => {
+  const blog = await Blog.findById(request.params.id).populate('user', 'username name id')
+  if (blog) {
+      response.json(blog)
+  } else {
+      response.status(404).end()
   }
 })
 
